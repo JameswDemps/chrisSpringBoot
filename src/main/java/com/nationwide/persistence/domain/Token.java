@@ -17,7 +17,8 @@ public class Token {
 	private Long id;
 	private String username;
 	private String bearerToken;
-	
+	private String password;
+
 	public Long getId() {
 		return id;
 	}
