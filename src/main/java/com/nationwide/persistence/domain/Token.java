@@ -10,7 +10,7 @@ import javax.persistence.Id;
  *
  */
 @Entity
-public class Account {
+public class Token {
 
 	@Id
 	@GeneratedValue
