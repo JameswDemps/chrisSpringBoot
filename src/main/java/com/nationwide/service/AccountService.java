@@ -1,5 +1,7 @@
 package com.nationwide.service;
 
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,5 +32,15 @@ public class AccountService {
 	public List<Account> readAll() {
 		return accountRepository.findAll();
 	}
-	
+
+	public String tokenCreator() {
+		SecureRandom secureRandom = new SecureRandom(); //threadsafe
+		Base64.Encoder base64Encoder = Base64.getUrlEncoder(); //threadsafe
+
+		byte[] randomBytes = new byte[24];
+		secureRandom.nextBytes(randomBytes);
+		System.out.println(base64Encoder.encodeToString(randomBytes));
+		return base64Encoder.encodeToString(randomBytes);
+	}
+
 }
