@@ -4,6 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * An entity class based off the Account table in the database.
+ * @author Adam
+ *
+ */
 @Entity
 public class Account {
 
