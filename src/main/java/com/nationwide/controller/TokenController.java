@@ -15,6 +15,10 @@ import com.nationwide.mapping.MyMapping;
 import com.nationwide.persistence.domain.Token;
 import com.nationwide.service.TokenService;
 
+/**
+ * @author Neel
+ *
+ */
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/token")
@@ -26,6 +30,11 @@ public class TokenController {
     @Autowired
     private MyMapping myMapping;
     
+    /**
+     * creates the token for the user
+     * @param username - a string that contains the username
+     * @return username and token
+     */
     @PostMapping("/{username}")
     public ResponseTokenDto createToken(@PathVariable String username) {
     	Token token = tokenService.createToken(username);
@@ -39,9 +48,14 @@ public class TokenController {
     	response.setUsername(token.getUsername());
     	response.setBearerToken(token.getBearerToken());
     	return response;
-        
+
     }
     
+    /**
+     * update bearerToken to newly generated token
+     * @param bearerToken - a string that contains the bearerToken of the user
+     * @return new token
+     */
     @PutMapping("/{bearerToken}")
     public ResponseTokenDto updateToken(@PathVariable String bearerToken) {
     	Token token =  tokenService.updateToken(bearerToken);
@@ -51,6 +65,11 @@ public class TokenController {
     	return response;
     }
     
+    /**
+     * deletes token
+     * @param bearerToken - a string that contains the bearerToken of the user
+     * @return string that the token has been deleted
+     */
     @DeleteMapping("/{bearerToken}")
     public String deleteToken(@PathVariable String bearerToken) {
     	tokenService.deleteToken(bearerToken);

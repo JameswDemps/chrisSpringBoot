@@ -1,5 +1,12 @@
 package com.nationwide.dto;
 
+/**
+ * This is returned to the user 
+ * This is so we don't expose the user ID
+ * This is the token class with the user ID removed
+ * @author n/a
+ *
+ */
 public class ResponseTokenDto {
 
 	private String username;
