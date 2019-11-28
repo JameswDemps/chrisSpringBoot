@@ -13,9 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
  * 
  * Defines the Docket bean and finds a way to control the endpoints exposed by Swagger.
  * 
- * Predicates for selection of RequestHandlers can be configured
- *  with the help of RequestHandlerSelectors and PathSelectors. Using
- *   any() for both will make documentation for your entire API available through Swagger.
+ * Makes the documentation for your entire API available through Swagger.
  * 
  * @author n/a
  *
