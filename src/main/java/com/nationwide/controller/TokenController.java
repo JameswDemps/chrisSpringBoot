@@ -59,10 +59,7 @@ public class TokenController {
     @PutMapping("/{bearerToken}")
     public ResponseTokenDto updateToken(@PathVariable String bearerToken) {
     	Token token =  tokenService.updateToken(bearerToken);
-    	ResponseTokenDto response = new ResponseTokenDto();
-    	response.setUsername(token.getUsername());
-    	response.setBearerToken(token.getBearerToken());
-    	return response;
+    	return myMapping.map(token, ResponseTokenDto.class);
     }
     
     /**
