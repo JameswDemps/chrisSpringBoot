@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.nationwide.dto.ResponseTokenDto;
+import com.nationwide.mapping.MyMapping;
 import com.nationwide.persistence.domain.Token;
 import com.nationwide.service.TokenService;
 
@@ -25,6 +26,9 @@ public class TokenController {
 	
     @Autowired
     private TokenService tokenService;
+
+    @Autowired
+    private MyMapping myMapping;
     
     /**
      * creates the token for the user
@@ -34,20 +38,17 @@ public class TokenController {
     @PostMapping("/{username}")
     public ResponseTokenDto createToken(@PathVariable String username) {
     	Token token = tokenService.createToken(username);
+    	return myMapping.map(token, ResponseTokenDto.class);
+    }
+    
+    @GetMapping("/{bearerToken}")
+    public ResponseTokenDto getTokenUserDetails(@PathVariable String bearerToken){
+    	Token token =  tokenService.readByBearerToken(bearerToken);
     	ResponseTokenDto response = new ResponseTokenDto();
     	response.setUsername(token.getUsername());
     	response.setBearerToken(token.getBearerToken());
     	return response;
-    }
-    
-    /**
-     * returns details of user
-     * @param bearerToken - a string that contains the bearerToken of the user
-     * @return username, id and token of user
-     */
-    @GetMapping("/{bearerToken}")
-    public Token getTokenUserDetails(@PathVariable String bearerToken){
-        return tokenService.readByBearerToken(bearerToken);
+
     }
     
     /**
@@ -56,8 +57,12 @@ public class TokenController {
      * @return new token
      */
     @PutMapping("/{bearerToken}")
-    public Token updateToken(@PathVariable String bearerToken) {
-    	return tokenService.updateToken(bearerToken);
+    public ResponseTokenDto updateToken(@PathVariable String bearerToken) {
+    	Token token =  tokenService.updateToken(bearerToken);
+    	ResponseTokenDto response = new ResponseTokenDto();
+    	response.setUsername(token.getUsername());
+    	response.setBearerToken(token.getBearerToken());
+    	return response;
     }
     
     /**
