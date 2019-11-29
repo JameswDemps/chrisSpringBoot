@@ -44,11 +44,7 @@ public class TokenController {
     @GetMapping("/{bearerToken}")
     public ResponseTokenDto getTokenUserDetails(@PathVariable String bearerToken){
     	Token token =  tokenService.readByBearerToken(bearerToken);
-    	ResponseTokenDto response = new ResponseTokenDto();
-    	response.setUsername(token.getUsername());
-    	response.setBearerToken(token.getBearerToken());
-    	return response;
-
+    	return myMapping.map(token, ResponseTokenDto.class);
     }
     
     /**
